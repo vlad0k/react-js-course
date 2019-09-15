@@ -1,8 +1,8 @@
-.Profile {
-  background-color: cornflowerblue;
-}
-
 .Profile-image {
   width: 100%;
   height: 300px;
+}
+
+.descBlock {
+  padding: 10px;
 }

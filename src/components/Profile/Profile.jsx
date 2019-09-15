@@ -1,27 +1,16 @@
 import React from 'react';
-import './Profile.css';
+import classes from './Profile.module.css';
+
+import MyPosts from './MyPosts/MyPosts.jsx';
+import ProfileInfo from './ProfileInfo/ProfileInfo.jsx';
 
 const Profile = () => {
   return (
-    <div className='Profile'>
-      <img className='Profile-image' src='https://www.belightsoft.com/products/imagetricks/img/intro-video-poster@2x.jpg' />
+    <div className={classes['Profile']}>
       <div>
-        ava + descr
+        <ProfileInfo />
       </div>
-      <div>
-        My posts
-        <div>
-          New post
-        </div>
-        <div>
-          <div>
-            Post 1
-          </div>
-          <div>
-            Post 2
-          </div>
-        </div>
-      </div>
+      <MyPosts />
     </div>
   );
 }

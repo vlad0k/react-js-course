@@ -1,0 +1,14 @@
+.Navigation {
+  background-color: burlywood;
+  padding: 4px;
+}
+
+.Navigation-elem a {
+  text-decoration: none;
+  color: white;
+  font-size: 24pt;
+}
+
+.Navigation-elem a.activeLink {
+  color: gold;
+}
