@@ -1,31 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.css';
 
-import Header from './components/Header/Header.jsx';
+import Header from './components/Header/Header.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import Dialog from './components/Dialog/Dialog.jsx';
+
 import {BrowserRouter, Route} from 'react-router-dom';
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className='App-wrapper'>
 
-        <Header className='App-header'/>
+        <Header className='App-header'/>
+        <Navigation className='App-navigation' />
+        <div className='App-content'>
 
-        <Navigation className='App-navigation' />
+          <Route path='/messages' render={() => <Dialog messagesPage={props.appState.dialogsPage} />} />
+          <Route path='/profile' render={() => <Profile profilePage={props.appState.profilePage} addPost={props.addPost}/>} />
 
-        <div className='App-content'>
-          <Route path='/messages' component={Dialog} />
-          <Route path='/profile' component={Profile} />
-        </div>
-
+        </div>
 
       </div>
     </BrowserRouter>
   );
 }
 
-export default App;
+export default App;

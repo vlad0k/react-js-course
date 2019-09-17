@@ -7,11 +7,18 @@
 
 .contacts{
   grid-area: cntcts;
+  padding: 10px;
 }
 
-.activeName {
+.name a.activeName {
   color: gold;
 }
+.name a {
+  text-decoration: none;
+  color: white;
+}
+
 .messageWrapper {
   grid-area: msgs;
+  padding: 10px;
 }
