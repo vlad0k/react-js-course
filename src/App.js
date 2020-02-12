@@ -6,9 +6,9 @@ import Navigation from './components/Navigation/Navigation.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import Dialog from './components/Dialog/Dialog.jsx';
 
-import {BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-function App(props) {
+function App({ state, store }) {
   return (
     <BrowserRouter>
       <div className='App-wrapper'>
@@ -17,9 +17,8 @@ import {BrowserRouter, Route} from 'react-router-dom';
         <Navigation className='App-navigation' />
         <div className='App-content'>
 
-          <Route path='/messages' render={() => <Dialog messagesPage={props.appState.dialogsPage} />} />
-          <Route path='/profile' render={() => <Profile profilePage={props.appState.profilePage} addPost={props.addPost}/>} />
-
+          <Route path='/messages' render={() => <Dialog messagesPage={store.getState().dialogsPage} />}/>
+          <Route path='/profile' render={() => <Profile profilePage={store.getState().profilePage} dispatch={store.dispatch.bind(store)}/>} />
         </div>
 
       </div>
