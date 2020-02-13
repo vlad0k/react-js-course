@@ -4,12 +4,21 @@ import classes from './Dialog.module.css';
 import ContactName from './ContactName/ContactName.jsx'
 import Message from './Message/Message.jsx'
 
+import { updateNewMessageBodyActionCreator, addNewMessageActionCreator } from '../../redux/dialogs-reducer.js';
+
 const Dialog = (props) => {
 
   let messageInputRef = React.createRef();
 
   let sendButtonClick = () => {
-    alert(messageInputRef.current.value);
+    var action = addNewMessageActionCreator();
+    messageInputRef.current.value = '';
+    props.dispatch(action);
+  }
+
+  const newMessageChangeHandler = () => {
+    var action = updateNewMessageBodyActionCreator(messageInputRef.current.value);
+    props.dispatch(action);
   }
 
   return (
@@ -17,13 +26,11 @@ const Dialog = (props) => {
 
       <div className={classes.contacts}>
         {props.messagesPage.dialogsData.map((elem) => <ContactName data={elem} />)}
-
-
       </div>
 
       <div className={classes.messageWrapper}>
         {props.messagesPage.messages.map((elem) => <Message data={elem} />)}
-        <textarea ref={messageInputRef} />
+        <textarea onChange={newMessageChangeHandler} ref={messageInputRef} value={props.newMessageBody}/>
         <button onClick={sendButtonClick}>Send</button>
       </div>
     </div>

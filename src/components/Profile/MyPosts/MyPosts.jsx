@@ -3,7 +3,7 @@ import classes from './MyPosts.module.css';
 
 import Post from './Post/Post.jsx';
 
-import { updateNewPostTextActionCreator, addPostActionCreator } from '../../../redux/state.js';
+import { updateNewPostTextActionCreator, addPostActionCreator } from '../../../redux/profile-reducer.js';
 
 
 

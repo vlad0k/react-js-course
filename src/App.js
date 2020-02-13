@@ -9,6 +9,7 @@ import Dialog from './components/Dialog/Dialog.jsx';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 function App({ state, store }) {
+  console.log('render');
   return (
     <BrowserRouter>
       <div className='App-wrapper'>
@@ -16,9 +17,16 @@ import { BrowserRouter, Route } from 'react-router-dom';
         <Header className='App-header'/>
         <Navigation className='App-navigation' />
         <div className='App-content'>
-
-          <Route path='/messages' render={() => <Dialog messagesPage={store.getState().dialogsPage} />}/>
-          <Route path='/profile' render={() => <Profile profilePage={store.getState().profilePage} dispatch={store.dispatch.bind(store)}/>} />
+          <Route
+            path='/messages'
+            render={() => <Dialog messagesPage={store.getState().dialogsPage}
+            dispatch={store.dispatch.bind(store)}/>}
+          />
+          <Route
+            path='/profile'
+            render={() => <Profile profilePage={store.getState().profilePage}
+            dispatch={store.dispatch.bind(store)}/>}
+          />
         </div>
 
       </div>
