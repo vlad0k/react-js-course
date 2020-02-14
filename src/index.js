@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import store from './redux/state.js';
+import store from './redux/redux-store.js';
 
 let renderEntireTree = (state) => {
   ReactDOM.render(
@@ -15,7 +15,7 @@ let renderEntireTree = (state) => {
 
 renderEntireTree(store.getState());
 
-store.subscribe(renderEntireTree);
+store.subscribe(() => renderEntireTree(store.getState()));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

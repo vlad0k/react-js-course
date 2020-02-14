@@ -4,7 +4,7 @@ import React from 'react';
 import Header from './components/Header/Header.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
 import Profile from './components/Profile/Profile.jsx';
-import Dialog from './components/Dialog/Dialog.jsx';
+import DialogContainer from './components/Dialog/DialogContainer.jsx';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -19,13 +19,11 @@ import { BrowserRouter, Route } from 'react-router-dom';
         <div className='App-content'>
           <Route
             path='/messages'
-            render={() => <Dialog messagesPage={store.getState().dialogsPage}
-            dispatch={store.dispatch.bind(store)}/>}
+            render={() => <DialogContainer store={store} />}
           />
           <Route
             path='/profile'
-            render={() => <Profile profilePage={store.getState().profilePage}
-            dispatch={store.dispatch.bind(store)}/>}
+            render={ () => <Profile store={store} /> }
           />
         </div>
 

@@ -1,7 +1,28 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-const dialogsReducer = (state, action) => {
+const initialState = {
+    postsData: [
+      {
+        id: 1,
+        content: 'Hi, there',
+        likesCount: 9
+      },
+      {
+        id: 0,
+        content: 'My 1st post',
+        likesCount: 12
+      },
+      {
+        id: 2,
+        content: 'Blah Blah Blah',
+        likesCount: 12
+      }
+    ],
+    newPostText: 'lalala'
+}
+
+const dialogsReducer = (state = initialState, action) => {
   if (action.type === ADD_POST) {
     if (state.newPostText) {
       let newPost = {

@@ -4,21 +4,17 @@ import classes from './Dialog.module.css';
 import ContactName from './ContactName/ContactName.jsx'
 import Message from './Message/Message.jsx'
 
-import { updateNewMessageBodyActionCreator, addNewMessageActionCreator } from '../../redux/dialogs-reducer.js';
-
 const Dialog = (props) => {
 
   let messageInputRef = React.createRef();
 
   let sendButtonClick = () => {
-    var action = addNewMessageActionCreator();
+    props.sendButtonClick();
     messageInputRef.current.value = '';
-    props.dispatch(action);
   }
 
   const newMessageChangeHandler = () => {
-    var action = updateNewMessageBodyActionCreator(messageInputRef.current.value);
-    props.dispatch(action);
+    props.newMessageChangeHandler(messageInputRef.current.value);
   }
 
   return (
