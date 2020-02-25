@@ -22,27 +22,33 @@ const initialState = {
     newPostText: 'lalala'
 }
 
-const dialogsReducer = (state = initialState, action) => {
-  if (action.type === ADD_POST) {
-    if (state.newPostText) {
+const profileReducer = (state = initialState, action) => {
+
+  switch(action.type) {
+    case ADD_POST: {
       let newPost = {
         id: Math.random(),
         content: state.newPostText,
         likesCount: 0
       };
-      state.postsData.push(newPost);
-      state.newPostText = '';
+      return {
+        ...state,
+        postsData: [...state.postsData, newPost ],
+        newPostText: ''
+      }
     }
+    case UPDATE_NEW_POST_TEXT: {
+      return {
+        ...state,
+        newPostText: action.newText
+      }
+    }
+    default:
+      return state;
   }
-
-  if (action.type === UPDATE_NEW_POST_TEXT) {
-    state.newPostText = action.newText;
-  }
-
-  return state;
 }
 
-export default dialogsReducer;
+export default profileReducer;
 
 export const updateNewPostTextActionCreator = (newText) => ({
     type: UPDATE_NEW_POST_TEXT,

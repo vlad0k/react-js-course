@@ -27,25 +27,32 @@ const initialState = {
   newMessageBody: '',
 }
 
-const profileReducer = (state = initialState, action) => {
-
-  if (action.type === UPDATE_NEW_MESSAGE_BODY){
-    state.newMessageBody = action.body;
-  }
-
-  if (action.type === ADD_MESSAGE) {
-    let newMessage = {
-      id: Math.random(),
-      content: state.newMessageBody
+const dialogsReducer = (state = initialState, action) => {
+  switch(action.type) {
+    case UPDATE_NEW_MESSAGE_BODY: {
+      return {
+        ...state,
+        newMessageBody: action.body
+      }
     }
-    state.newMessageBody = '';
-    state.messages.push(newMessage);
+    case ADD_MESSAGE: {
+      let newMessage = {
+        id: Math.random(),
+        content: state.newMessageBody
+      }
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+        newMessageBody: ''
+      }
+    }
+    default: {
+      return state
+    }
   }
-
-  return state;
 }
 
-export default profileReducer;
+export default dialogsReducer;
 
 
 export const updateNewMessageBodyActionCreator = (newText) => ({

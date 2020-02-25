@@ -5,30 +5,32 @@ import React from 'react';
 import Navigation from './components/Navigation/Navigation.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import DialogContainer from './components/Dialog/DialogContainer.jsx';
+import UsersContainer from './components/Users/UsersContainer.jsx';
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
-function App({ state, store }) {
-  console.log('render');
+function App() {
   return (
-    <BrowserRouter>
-      <div className='App-wrapper'>
+    <div className='App-wrapper'>
 
-        <Header className='App-header'/>
-        <Navigation className='App-navigation' />
-        <div className='App-content'>
-          <Route
-            path='/messages'
-            render={() => <DialogContainer store={store} />}
-          />
-          <Route
-            path='/profile'
-            render={ () => <Profile store={store} /> }
-          />
-        </div>
+      <Header className='App-header'/>
+      <Navigation className='App-navigation' />
+      <div className='App-content'>
+        <Route
+          path='/messages'
+          render={() => <DialogContainer />}
+        />
+        <Route
+          path='/profile'
+          render={ () => <Profile /> }
+        />
+        <Route
+          path='/users'
+          render={ () => <UsersContainer /> }
+        />
+      </div>
 
-      </div>
-    </BrowserRouter>
+    </div>
   );
 }
 

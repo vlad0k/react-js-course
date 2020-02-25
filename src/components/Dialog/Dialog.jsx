@@ -8,13 +8,13 @@ const Dialog = (props) => {
 
   let messageInputRef = React.createRef();
 
-  let sendButtonClick = () => {
+  let sendButtonClick = (event) => {
+    event.preventDefault();
     props.sendButtonClick();
-    messageInputRef.current.value = '';
   }
 
-  const newMessageChangeHandler = () => {
-    props.newMessageChangeHandler(messageInputRef.current.value);
+  const newMessageChangeHandler = (event) => {
+    props.newMessageChangeHandler(event.target.value);
   }
 
   return (
@@ -26,8 +26,10 @@ const Dialog = (props) => {
 
       <div className={classes.messageWrapper}>
         {props.messagesPage.messages.map((elem) => <Message data={elem} />)}
-        <textarea onChange={newMessageChangeHandler} ref={messageInputRef} value={props.newMessageBody}/>
-        <button onClick={sendButtonClick}>Send</button>
+        <form onSubmit={sendButtonClick}>
+          <textarea onChange={newMessageChangeHandler} ref={messageInputRef} value={props.messagesPage.newMessageBody}/>
+          <input type='submit' value='Send'/>
+        </form>
       </div>
     </div>
   );
