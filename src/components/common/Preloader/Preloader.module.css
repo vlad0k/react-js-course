@@ -1,0 +1,9 @@
+.loader {
+  display: block;
+  animation: loaderAppearance 0.3s ease-in;
+}
+
+@keyframes loaderAppearance {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

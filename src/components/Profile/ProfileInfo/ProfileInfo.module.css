@@ -6,3 +6,8 @@
 .descBlock {
   padding: 10px;
 }
+
+.userPhoto{
+  width: 300px;
+  height: 300px;
+}

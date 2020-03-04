@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 
-import Header from './components/Header/Header.jsx';
+import HeaderContainer from './components/Header/HeaderContainer.jsx';
 import Navigation from './components/Navigation/Navigation.jsx';
-import Profile from './components/Profile/Profile.jsx';
+import ProfileContainer from './components/Profile/ProfileContainer.jsx';
 import DialogContainer from './components/Dialog/DialogContainer.jsx';
 import UsersContainer from './components/Users/UsersContainer.jsx';
 
@@ -13,7 +13,7 @@ import { Route } from 'react-router-dom';
   return (
     <div className='App-wrapper'>
 
-      <Header className='App-header'/>
+      <HeaderContainer className='App-header'/>
       <Navigation className='App-navigation' />
       <div className='App-content'>
         <Route
@@ -21,8 +21,8 @@ import { Route } from 'react-router-dom';
           render={() => <DialogContainer />}
         />
         <Route
-          path='/profile'
-          render={ () => <Profile /> }
+          path='/profile/:userid?'
+          render={ () => <ProfileContainer /> }
         />
         <Route
           path='/users'
