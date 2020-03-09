@@ -1,8 +1,13 @@
+import { usersAPI } from '../api/api.js';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_FOLLOW_FETCHING = 'TOGGLE-FOLLOW-FETCHING';
+
+
 
 // const photoURL = 'https://steemitimages.com/0x0/http://rampages.us/alharthiaa/wp-content/uploads/sites/8487/2015/08/5249700000_5247598126_mrbean_rare_collection_xlarge_xlarge.jpeg';
 
@@ -15,7 +20,7 @@ const initialState = {
   currentPage: 1,
   pageSize: 20,
   totalUsersCount: 0,
-  isFetching: false,
+  followFetchingID: [],
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -70,16 +75,57 @@ const usersReducer = (state = initialState, action) => {
       }
     }
 
+    case TOGGLE_FOLLOW_FETCHING: {
+      return {
+        ...state,
+        followFetchingID: (action.isFetching
+          ? [...state.followFetchingID, action.id]
+          : state.followFetchingID.filter(id => id !== action.id)
+        ),
+      }
+    }
+
     default:
       return state;
   }
-
 }
 
 export default usersReducer;
 
-export const follow = (userID) => ({type: FOLLOW, userID });
-export const unfollow = (userID) => ({type: UNFOLLOW, userID});
+export const followSuccess = (userID) => ({type: FOLLOW, userID });
+export const unfollowSuccess = (userID) => ({type: UNFOLLOW, userID});
 export const setUsers = (users, totalUsersCount) => ({type: SET_USERS, users, totalUsersCount});
 export const setCurrenPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const toggleFollowFetching = (isFetching, id) => ({type: TOGGLE_FOLLOW_FETCHING, isFetching, id});
+
+export const getUsers = (currentPage, pageSize) => ((dispatch) => {
+
+  dispatch(toggleIsFetching(true));
+
+  usersAPI.getUsers(currentPage, pageSize).then(data => {
+    dispatch(setUsers(data.items, data.totalCount));
+    dispatch(toggleIsFetching(false));
+  });
+});
+
+export const follow = id => (dispatch => {
+  dispatch(toggleFollowFetching(true, id));
+  usersAPI.follow(id).then((data) => {
+    if (data.resultCode === 0){
+      dispatch(followSuccess(id));
+      dispatch(toggleFollowFetching(false, id));
+    }
+  });
+});
+
+export const unfollow = id => (dispatch => {
+  dispatch(toggleFollowFetching(true, id));
+
+  usersAPI.unfollow(id).then((data) => {
+    if (data.resultCode === 0){
+      dispatch(unfollowSuccess(id));
+      dispatch(toggleFollowFetching(false, id));
+    }
+  });
+})

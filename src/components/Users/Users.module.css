@@ -8,6 +8,7 @@
 }
 
 .selectedPage {
+  user-select: none;
   font-weight: bold;
   font-size: 20px;
 }
@@ -21,4 +22,18 @@
   padding: 4px;
   cursor: pointer;
   border-radius: 10px;
+}
+
+.follow {
+  display: flex;
+  align-items: center;
+
+}
+
+.follow button {
+  outline: none;
+}
+.follow img {
+  display: inline;
+  height: 28px;
 }

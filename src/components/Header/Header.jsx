@@ -3,7 +3,7 @@ import classes from './Header.module.css';
 
 import {NavLink} from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header className={classes['Header']}>
       <NavLink to='/profile'>
@@ -11,7 +11,7 @@ const Header = () => {
       </NavLink>
 
       <div className={classes['loginBlock']}>
-        <NavLink to='/login'>Login</NavLink>
+        {props.isAuthorized ? <NavLink to='/settings'>{props.login}</NavLink> : <NavLink to='/login'>Login</NavLink>}
       </div>
     </header>
   );

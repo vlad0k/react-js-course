@@ -14,7 +14,9 @@ import { Route } from 'react-router-dom';
     <div className='App-wrapper'>
 
       <HeaderContainer className='App-header'/>
+
       <Navigation className='App-navigation' />
+
       <div className='App-content'>
         <Route
           path='/messages'
@@ -27,6 +29,10 @@ import { Route } from 'react-router-dom';
         <Route
           path='/users'
           render={ () => <UsersContainer /> }
+        />
+        <Route
+          path='/login'
+          render={ () => <h1>LOGIN</h1> }
         />
       </div>
 

@@ -1,30 +1,27 @@
 import React from 'react';
-import * as axios from 'axios';
 
 import Users from './Users.jsx';
 
-import { follow, unfollow, setUsers, setCurrenPage, toggleIsFetching } from '../../redux/users-reducer.js';
+import { follow, unfollow, setUsers, setCurrenPage, toggleIsFetching, toggleFollowFetching, getUsers} from '../../redux/users-reducer.js';
 
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withAuthRedirect } from '../hoc/withAuthRedirect.js';
 
 class UsersContainer extends React.Component {
 
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-      this.props.setUsers(response.data.items, response.data.totalCount);
-      this.props.toggleIsFetching(false);
-    });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChange = (pageNumber) => {
-    this.props.toggleIsFetching(true);
+    if (this.props.currentPage === pageNumber) {
+      return;
+    }
+
     this.props.setUsers([], this.props.totalUsersCount);
     this.props.setCurrenPage(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-      this.props.setUsers(response.data.items, response.data.totalCount);
-      this.props.toggleIsFetching(false);
-    });
+    this.props.getUsers(pageNumber, this.props.pageSize);
   }
 
   render(){
@@ -41,6 +38,8 @@ class UsersContainer extends React.Component {
           unfollow={this.props.unfollow}
           isFetching={this.props.isFetching}
           toggleIsFetching={this.props.toggleIsFetching}
+          followFetchingID={this.props.followFetchingID}
+
         />
       </>
     )
@@ -55,6 +54,7 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followFetchingID: state.usersPage.followFetchingID,
   }
 }
 
@@ -78,4 +78,24 @@ const mapStateToProps = (state) => {
 //   }
 // }
 
-export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrenPage, toggleIsFetching,})(UsersContainer);
+// let withRedirectUsersContainer = withAuthRedirect(UsersContainer);
+//
+// export default connect(mapStateToProps, {follow, unfollow, setUsers,
+//   setCurrenPage, toggleIsFetching, toggleFollowFetching,
+//   getUsers})(withRedirectUsersContainer);
+
+export default compose(
+  withAuthRedirect,
+  connect(
+    mapStateToProps,
+    {
+      follow,
+      unfollow,
+      setUsers,
+      setCurrenPage,
+      toggleIsFetching,
+      toggleFollowFetching,
+      getUsers
+    }
+  )
+)(UsersContainer);

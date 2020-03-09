@@ -31,14 +31,27 @@ const Users = (props) => {
         props.users.map( u => (
           <div key={u.id}>
             <span>
+
               <NavLink to={`/profile/${u.id}`}>
                 <img className={classes['userPhoto']} src={ u.photos.small ? u.photos.small : userPhoto} alt={u.name}/>
               </NavLink>
 
-              <div>
-                {!u.followed && <button onClick={() => props.follow(u.id)}>Follow</button>}
-                {u.followed && <button onClick={() => props.unfollow(u.id)}>Unfollow</button>}
+              <div className={classes['follow']}>
+
+                {!u.followed && <button
+                    disabled={props.followFetchingID.some(id => id === u.id)}
+                    onClick={() => props.follow(u.id)}
+                  >Follow</button>}
+
+                {u.followed && <button
+                    disabled={props.followFetchingID.some(id => id === u.id)}
+                    onClick={() => props.unfollow(u.id)}
+                  >Unfollow</button>}
+
+                {props.followFetchingID.some(id => id === u.id) && <Preloader />}
+
               </div>
+
             </span>
 
             <span>
