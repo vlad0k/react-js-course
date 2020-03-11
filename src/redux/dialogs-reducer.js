@@ -24,12 +24,12 @@ const initialState = {
       content: "The weather is good isn't it?"
     }
   ],
-  newMessageBody: '',
 }
 
 const dialogsReducer = (state = initialState, action) => {
   switch(action.type) {
     case UPDATE_NEW_MESSAGE_BODY: {
+      console.log(action.body);
       return {
         ...state,
         newMessageBody: action.body
@@ -37,13 +37,12 @@ const dialogsReducer = (state = initialState, action) => {
     }
     case ADD_MESSAGE: {
       let newMessage = {
-        id: Math.random(),
-        content: state.newMessageBody
+        id: 4,
+        content: action.newMessageBody
       }
       return {
         ...state,
         messages: [...state.messages, newMessage],
-        newMessageBody: ''
       }
     }
     default: {
@@ -55,9 +54,9 @@ const dialogsReducer = (state = initialState, action) => {
 export default dialogsReducer;
 
 
-export const updateNewMessageBodyActionCreator = (newText) => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: newText
-  });
+// export const updateNewMessageBodyActionCreator = (newText) => ({
+//     type: UPDATE_NEW_MESSAGE_BODY,
+//     body: newText
+//   });
 
-export const addNewMessageActionCreator = () => ({ type: ADD_MESSAGE });
+export const addNewMessageActionCreator = (newMessageBody) => ({ type: ADD_MESSAGE, newMessageBody });

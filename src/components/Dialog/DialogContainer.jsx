@@ -1,6 +1,6 @@
 import Dialog from './Dialog.jsx'
 
-import { updateNewMessageBodyActionCreator, addNewMessageActionCreator } from '../../redux/dialogs-reducer.js';
+import { addNewMessageActionCreator } from '../../redux/dialogs-reducer.js';
 
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 
@@ -43,13 +43,12 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    sendButtonClick: () => {
-      dispatch(addNewMessageActionCreator())
+    sendButtonClick: (newMessageBody) => {
+      dispatch(addNewMessageActionCreator(newMessageBody))
     },
-    newMessageChangeHandler: (body) => {
-      dispatch(updateNewMessageBodyActionCreator(body))
-    }
-
+    // newMessageChangeHandler: (body) => {
+    //   dispatch(updateNewMessageBodyActionCreator(body))
+    // }
   }
 }
 

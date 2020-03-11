@@ -1,20 +1,19 @@
 import React from 'react';
 import classes from './Dialog.module.css';
 
+
+
 import ContactName from './ContactName/ContactName.jsx'
 import Message from './Message/Message.jsx'
+import AddMessageForm from './AddMessageForm/AddMessageForm.jsx'
+
 
 const Dialog = (props) => {
 
-  let messageInputRef = React.createRef();
+  // let messageInputRef = React.createRef();
 
-  let sendButtonClick = (event) => {
-    event.preventDefault();
-    props.sendButtonClick();
-  }
-
-  const newMessageChangeHandler = (event) => {
-    props.newMessageChangeHandler(event.target.value);
+  let onSubmit = (formData) => {
+    props.sendButtonClick(formData.newMessage);
   }
 
   return (
@@ -26,10 +25,7 @@ const Dialog = (props) => {
 
       <div className={classes.messageWrapper}>
         {props.messagesPage.messages.map((elem) => <Message data={elem} />)}
-        <form onSubmit={sendButtonClick}>
-          <textarea onChange={newMessageChangeHandler} ref={messageInputRef} value={props.messagesPage.newMessageBody}/>
-          <input type='submit' value='Send'/>
-        </form>
+        <AddMessageForm onSubmit={onSubmit} newMessageBody={props.messagesPage.newMessageBody}/>
       </div>
     </div>
   );

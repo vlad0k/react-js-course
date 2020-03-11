@@ -2,15 +2,23 @@ import React from 'react';
 import classes from './Navigation.module.css';
 import {NavLink} from  'react-router-dom';
 
-const Navigation = () => {
+const NavElem = (props) => {
+  return (
+    <div className={classes['Navigation-elem']}><NavLink to={props.to} activeClassName={classes.activeLink}>{props.navName}</NavLink></div>
+  )
+}
+
+const Navigation = (props) => {
   return (
     <nav className={classes['Navigation']}>
-      <div className={classes['Navigation-elem']}><NavLink to='/profile' activeClassName={classes.activeLink}>Profile</NavLink></div>
-      <div className={classes['Navigation-elem']}><NavLink to='/messages' activeClassName={classes.activeLink}>Messages</NavLink></div>
-      <div className={classes['Navigation-elem']}><NavLink to='/news' activeClassName={classes.activeLink}>News</NavLink></div>
-      <div className={classes['Navigation-elem']}><NavLink to='/music' activeClassName={classes.activeLink}>Music</NavLink></div>
-      <div className={classes['Navigation-elem']}><NavLink to='/users' activeClassName={classes.activeLink}>Find Users</NavLink></div>
-      <div className={classes['Navigation-elem']}><NavLink to='/settings'activeClassName={classes.activeLink}>Settings</NavLink></div>
+      {props.isAuthorized && <div>
+        <NavElem to='/profile' navName='Profile'/>
+        <NavElem to='/messages' navName='Messages' />
+        <NavElem to='/news' navName='News' />
+        <NavElem to='/music' navName='Music' />
+        <NavElem to='/users' navName='Find User' />
+        <NavElem to='/settings' navName='Settings' />
+      </div>}
     </nav>
   );
 }

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { usersAPI } from '../../../api/api.js';
-
 class ProfileStatus extends React.Component {
   state = {
     editMode: false,
@@ -19,14 +17,20 @@ class ProfileStatus extends React.Component {
   deactivateEditMode = (e) => {
     e.preventDefault();
     this.setState({editMode: false});
-    usersAPI.updateStatus(this.state.inputValue);
+    this.props.updateStatus(this.state.inputValue);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.status !== this.props.status){
+      this.setState({inputValue: this.props.status});
+    }
   }
 
   render() {
     return (
       <>
         {!this.state.editMode && <div>
-            <span onDoubleClick={this.activateEditMode.bind(this)}>{this.state.inputValue}</span>
+            <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status ? this.state.inputValue : 'no-status'}</span>
           </div>
         }
         {this.state.editMode && <form onSubmit={this.deactivateEditMode}>

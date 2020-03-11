@@ -19,15 +19,31 @@ export const usersAPI = {
    return instance.delete(`follow/${id}`).then(response => response.data)
  },
  getProfile(id) {
-   return instance.get(`profile/${id}`).then(response => response.data)
- },
- updateStatus(newStatus) {
-   return instance.put('profile/status', newStatus);
+   console.warn('Obsolete Method!!!')
+   return profileAPI.getProfile(id);
  }
 };
 
 export const authAPI = {
   me() {
     return instance.get(`auth/me`).then(response => response.data)
+  },
+  login(email, password, rememberMe) {
+    return instance.post(`auth/login`, {email, password, rememberMe}).then(response => response.data)
+  },
+  logout() {
+    return instance.post(`auth/logout`).then(response => response.data)
+  },
+}
+
+export const profileAPI = {
+  getProfile(id) {
+    return instance.get(`profile/${id}`).then(response => response.data)
+  },
+  getUserStatus(id) {
+    return instance.get(`profile/status/${id}`).then(response => response.data);
+  },
+  updateStatus(newStatus) {
+    return instance.put('profile/status', {status: newStatus}).then((response) => response.data);;
   }
 }

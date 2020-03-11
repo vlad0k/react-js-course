@@ -3,12 +3,12 @@ import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-export const withAuthRedirect = (Component, to) => {
+export const withProfileRedirect = (Component, to) => {
 
   class RedirectComponent extends React.Component {
     render() {
-      if (!this.props.isAuthorized) {
-        return <Redirect to={'/login'} />
+      if (this.props.isAuthorized) {
+        return <Redirect to={'/profile'} />
       }
       return <Component {...this.props}/>
     }
