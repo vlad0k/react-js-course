@@ -2,7 +2,9 @@ import React from 'react';
 
 import Users from './Users.jsx';
 
-import { follow, unfollow, setUsers, setCurrenPage, toggleIsFetching, toggleFollowFetching, getUsers} from '../../redux/users-reducer.js';
+import { follow, unfollow, setUsers, setCurrenPage, toggleIsFetching, toggleFollowFetching, requestUsers} from '../../redux/users-reducer.js';
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowFetchingID } from '../../redux/users-selector.js';
+
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -11,7 +13,7 @@ import { withAuthRedirect } from '../hoc/withAuthRedirect.js';
 class UsersContainer extends React.Component {
 
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    this.props.requestUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChange = (pageNumber) => {
@@ -20,8 +22,7 @@ class UsersContainer extends React.Component {
     }
 
     this.props.setUsers([], this.props.totalUsersCount);
-    this.props.setCurrenPage(pageNumber);
-    this.props.getUsers(pageNumber, this.props.pageSize);
+    this.props.requestUsers(pageNumber, this.props.pageSize);
   }
 
   render(){
@@ -49,12 +50,12 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followFetchingID: state.usersPage.followFetchingID,
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followFetchingID: getFollowFetchingID(state),
   }
 }
 
@@ -95,7 +96,7 @@ export default compose(
       setCurrenPage,
       toggleIsFetching,
       toggleFollowFetching,
-      getUsers
+      requestUsers
     }
   )
 )(UsersContainer);

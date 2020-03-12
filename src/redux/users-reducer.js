@@ -21,11 +21,16 @@ const initialState = {
   pageSize: 20,
   totalUsersCount: 0,
   followFetchingID: [],
+  fake: 10
 }
 
 const usersReducer = (state = initialState, action) => {
 
   switch(action.type) {
+
+    case "FAKE": {
+      return {...state, faake: ++state.fake}
+    }
 
     case FOLLOW: {
       let stateCopy = {
@@ -99,11 +104,10 @@ export const setCurrenPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentP
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleFollowFetching = (isFetching, id) => ({type: TOGGLE_FOLLOW_FETCHING, isFetching, id});
 
-export const getUsers = (currentPage, pageSize) => ((dispatch) => {
-
+export const requestUsers = (page, pageSize) => ((dispatch) => {
   dispatch(toggleIsFetching(true));
-
-  usersAPI.getUsers(currentPage, pageSize).then(data => {
+  dispatch(setCurrenPage(page));
+  usersAPI.getUsers(page, pageSize).then(data => {
     dispatch(setUsers(data.items, data.totalCount));
     dispatch(toggleIsFetching(false));
   });

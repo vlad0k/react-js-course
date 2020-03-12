@@ -20,7 +20,7 @@ const ProfileInfo = (props) => {
       }
       <div className={classes.descBlock}>
         <img className={classes['userPhoto']} src={props.profile.photos.large ? props.profile.photos.large : userPNG} alt='avatar'/>
-        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus} pageID={props.pageID} myID={props.myID}/>
       </div>
     </div>
 

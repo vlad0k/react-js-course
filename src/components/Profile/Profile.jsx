@@ -12,7 +12,7 @@ const Profile = (props) => {
 
   return (
     <div className={classes['Profile']}>
-      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+      <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} pageID={props.match.params.userid} myID={props.myID}/>
       <MyPostsContainer />
     </div>
   );

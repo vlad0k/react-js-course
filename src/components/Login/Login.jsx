@@ -34,8 +34,8 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 const Login = (props) => {
 
   const initialValues = {
-    email: 'free@samuraijs.com',
-    password: 'free'
+    email: 'kaxad92526@mailernam.com',
+    password: '1234'
   }
 
   const onSubmit = (formData) => {
