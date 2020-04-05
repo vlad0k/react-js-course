@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/demo-react-course/static/css/main.879dcd25.chunk.css",
+    "main.js": "/demo-react-course/static/js/main.5ae6a8a3.chunk.js",
+    "main.js.map": "/demo-react-course/static/js/main.5ae6a8a3.chunk.js.map",
+    "runtime~main.js": "/demo-react-course/static/js/runtime~main.0a6abe87.js",
+    "runtime~main.js.map": "/demo-react-course/static/js/runtime~main.0a6abe87.js.map",
+    "static/js/2.b2d6ecf9.chunk.js": "/demo-react-course/static/js/2.b2d6ecf9.chunk.js",
+    "static/js/2.b2d6ecf9.chunk.js.map": "/demo-react-course/static/js/2.b2d6ecf9.chunk.js.map",
+    "static/css/3.6121d13d.chunk.css": "/demo-react-course/static/css/3.6121d13d.chunk.css",
+    "static/js/3.9dded79f.chunk.js": "/demo-react-course/static/js/3.9dded79f.chunk.js",
+    "static/js/3.9dded79f.chunk.js.map": "/demo-react-course/static/js/3.9dded79f.chunk.js.map",
+    "static/css/4.ff08e0c6.chunk.css": "/demo-react-course/static/css/4.ff08e0c6.chunk.css",
+    "static/js/4.a9d49654.chunk.js": "/demo-react-course/static/js/4.a9d49654.chunk.js",
+    "static/js/4.a9d49654.chunk.js.map": "/demo-react-course/static/js/4.a9d49654.chunk.js.map",
+    "index.html": "/demo-react-course/index.html",
+    "precache-manifest.c1c02754b4b91718156fa5d246a5db22.js": "/demo-react-course/precache-manifest.c1c02754b4b91718156fa5d246a5db22.js",
+    "service-worker.js": "/demo-react-course/service-worker.js",
+    "static/css/3.6121d13d.chunk.css.map": "/demo-react-course/static/css/3.6121d13d.chunk.css.map",
+    "static/css/4.ff08e0c6.chunk.css.map": "/demo-react-course/static/css/4.ff08e0c6.chunk.css.map",
+    "static/css/main.879dcd25.chunk.css.map": "/demo-react-course/static/css/main.879dcd25.chunk.css.map",
+    "static/media/loader.svg": "/demo-react-course/static/media/loader.ff3087a3.svg"
+  }
+}
