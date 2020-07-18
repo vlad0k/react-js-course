@@ -1,0 +1,25 @@
+.Paginator {
+  padding: 10px;
+  user-select: none;
+}
+
+.Paginator__page {
+  display: inline-block;
+  width: 26px;
+  text-align: center;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  margin-right: 4px;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.Paginator__page_selected {
+  border: 2px solid white;
+  width: 38px;
+  text-align: center;
+  user-select: none;
+  font-weight: bold;
+  font-size: 20px;
+}

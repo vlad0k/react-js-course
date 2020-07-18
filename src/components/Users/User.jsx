@@ -7,21 +7,10 @@ import { NavLink } from  'react-router-dom';
 import Preloader from '../common/Preloader/Preloader.jsx';
 import Paginator from '../common/Paginator/Paginator.jsx';
 
-const Users = (props) => {
+const User = (props) => {
   return (
-    <div className={classes['Users']}>
 
-      <Paginator
-        totalUsersCount={props.totalUsersCount}
-        pageSize={props.pageSize}
-        currentPage={props.currentPage}
-        onPageChange={props.onPageChange}
-      />
 
-      {props.isFetching && <Preloader isFetching={props.isFetching}/>}
-
-      {
-        props.users.map( u => (
           <div key={u.id}>
             <span>
 
@@ -58,11 +47,8 @@ const Users = (props) => {
                 <div>{'u.location.country'}</div>
               </span>
             </span>
-          </div>)
-        )
-      }
-    </div>
+          </div>
   )
 }
 
-export default Users;
+export default User;

@@ -26,6 +26,7 @@
 }
 
 .App-content {
+  position: relative;
   background-color: cornflowerblue;
   grid-area: cont;
 }

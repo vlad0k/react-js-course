@@ -7,9 +7,7 @@ class ProfileStatus extends React.Component {
   }
 
   activateEditMode = () => {
-    if (this.props.pageID === this.props.myID || !this.props.pageID){
-      this.setState({editMode: true});
-    }
+    this.setState({editMode: true});
   }
 
   statusInputChangeHandler = (e) => {

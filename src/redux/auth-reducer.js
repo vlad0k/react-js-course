@@ -1,7 +1,7 @@
 import { authAPI } from '../api/api.js';
 import { stopSubmit } from 'redux-form';
 
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USER_DATA = 'react-course/auth/SET-USER-DATA';
 
 const initialState = {
   id: null,
@@ -33,24 +33,23 @@ export default authReducer;
 export const setAuthUserData = (id, email, login, isAuthorized) => ({type: SET_USER_DATA, data: {id, email, login, isAuthorized}});
 
 // Thunk Creators
-export const getAuthUserData = () => dispatch => {
-  return authAPI.me().then(data => {
-      if (data.resultCode === 0){
-        let {id, email, login} = data.data;
-        dispatch(setAuthUserData(id, email, login, true));
-      }
-    });
+export const getAuthUserData = () => async (dispatch) => {
+  let data = await authAPI.me()
+  if (data.resultCode === 0){
+    let {id, email, login} = data.data;
+    dispatch(setAuthUserData(id, email, login, true));
+  }
 }
 
-export const login = (email, password, rememberMe) => dispatch => {
-  authAPI.login(email, password, rememberMe).then((result) => {
+export const login = (email, password, rememberMe) => async (dispatch) => {
+  let result = await authAPI.login(email, password, rememberMe)
+
     if (result.resultCode === 0) {
       dispatch(getAuthUserData());
     } else if (result.resultCode === 1){
       let action = stopSubmit('login', {_error: result.messages[0]});
       dispatch(action)
     }
-  })
 }
 
 export const logout = () => dispatch => {

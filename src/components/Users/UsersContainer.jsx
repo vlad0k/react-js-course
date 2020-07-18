@@ -3,7 +3,7 @@ import React from 'react';
 import Users from './Users.jsx';
 
 import { follow, unfollow, setUsers, setCurrenPage, toggleIsFetching, toggleFollowFetching, requestUsers} from '../../redux/users-reducer.js';
-import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowFetchingID } from '../../redux/users-selector.js';
+import { getUsersSelector, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowFetchingID } from '../../redux/users-selector.js';
 
 
 import { connect } from 'react-redux';
@@ -26,7 +26,6 @@ class UsersContainer extends React.Component {
   }
 
   render(){
-
     return (
       <>
         <Users
@@ -50,7 +49,7 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: getUsers(state),
+    users: getUsersSelector(state),
     pageSize: getPageSize(state),
     totalUsersCount: getTotalUsersCount(state),
     currentPage: getCurrentPage(state),

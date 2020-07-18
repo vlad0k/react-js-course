@@ -1,27 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import SamuraiJsApp from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { BrowserRouter } from 'react-router-dom';
-
-// import StoreContext from './StoreContext';
-import { Provider } from 'react-redux';
-
-import store from './redux/redux-store.js';
-
-// setInterval(() => {
-//   store.dispatch({type: 'FAKE'});
-// }, 1000);
+// import { BrowserRouter } from 'react-router-dom';
+//
+// // import StoreContext from './StoreContext';
+// import { Provider } from 'react-redux';
+//
+// import store from './redux/redux-store.js';
 
 // let renderEntireTree = (state) => {
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>,
+  <SamuraiJsApp />,
   document.getElementById('root')
 );
 // };
